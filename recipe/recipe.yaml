@@ -1,5 +1,5 @@
 context:
-  version: "0.4.1"
+  version: "0.5.0"
 
 package:
   name: fastpotify
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/crmne/fastpotify/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 4e8512d77dde4956a25b1470e8419a118a5a3e6fd93084c238048061c95808dc
+  sha256: ed498e33283937de57f883987bd60d65b275572d2d17ad88d922bc22275c440c
 
 build:
   number: 0
@@ -17,7 +17,13 @@ build:
       CARGO_PROFILE_RELEASE_LTO: fat
       CARGO_PROFILE_RELEASE_STRIP: symbols
     content:
-      - cargo auditable install --locked --no-track --bins --root "${LIBRARY_PREFIX:-$PREFIX}" --path .
+      - if: linux
+        then:
+          - export BINDGEN_EXTRA_CLANG_ARGS="--sysroot=$CONDA_BUILD_SYSROOT"
+          - export CMAKE_TOOLCHAIN_FILE="$RECIPE_DIR/projectm-toolchain.cmake"
+      - if: unix
+        then: LIBCLANG_PATH="$BUILD_PREFIX/lib" cargo auditable install --locked --no-track --bins --root "${LIBRARY_PREFIX:-$PREFIX}" --path .
+        else: cargo auditable install --locked --no-track --no-default-features --bins --root "${LIBRARY_PREFIX:-$PREFIX}" --path .
       - mkdir -p "$PREFIX/Menu"
       - cp "$RECIPE_DIR/menu.json" "$PREFIX/Menu/fastpotify.json"
       - if: linux
@@ -34,24 +40,34 @@ requirements:
   build:
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
     - ${{ compiler('rust') }}
+    - cmake
     - brush
     - cargo-auditable
     - cargo-bundle-licenses
+    - if: unix
+      then: libclang
     - if: linux
-      then: pkg-config
+      then:
+        - clangdev
+        - make
+        - pkg-config
+    - if: win
+      then: uutils-coreutils
   host:
     - if: linux
       then:
         - alsa-lib
+        - libgl-devel
         - libxkbcommon
         - pulseaudio-client
         - wayland
         - xorg-libx11
+        - xorg-xorgproto
   run:
     - if: linux
       then:
-        - libgl
         - xorg-libxcursor
         - xorg-libxi
         - xorg-libxrandr
