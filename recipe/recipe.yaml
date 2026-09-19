@@ -78,6 +78,7 @@ tests:
   - package_contents:
       bin:
         - fastpotify
+        - spotifast
       files:
         - Menu/fastpotify.*
       strict: true
