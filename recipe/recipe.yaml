@@ -31,9 +31,9 @@ build:
       - if: osx
         then:
           - bash packaging/macos/bundle.sh "$PREFIX/bin/fastpotify" Fastpotify.app "$PKG_VERSION"
-          - cp Fastpotify.app/Contents/Resources/fastpotify.icns "$PREFIX/Menu/fastpotify.icns"
+          - cp Fastpotify.app/Contents/Resources/spotifast.icns "$PREFIX/Menu/fastpotify.icns"
       - if: win
-        then: cp packaging/windows/fastpotify.ico "$PREFIX/Menu/fastpotify.ico"
+        then: cp packaging/windows/spotifast.ico "$PREFIX/Menu/fastpotify.ico"
       - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
 
 requirements:
@@ -75,9 +75,11 @@ requirements:
 tests:
   - script:
       - fastpotify --help
+      - spotifast --help
   - package_contents:
       bin:
         - fastpotify
+        - spotifast
       files:
         - Menu/fastpotify.*
       strict: true
@@ -86,8 +88,9 @@ about:
   homepage: https://fastpotify.rocks
   summary: Fast, lightweight, native Spotify client
   description: |
-    Fastpotify is a native Spotify client with local playback, Spotify
-    Connect, media-key integration, and system tray support.
+    Fastpotify, now released as Spotifast, is a native Spotify client with
+    local playback, Spotify Connect, media-key integration, and system tray
+    support. Both the spotifast and fastpotify commands are included.
   license: MIT
   license_file:
     - LICENSE
