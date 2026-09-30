@@ -3,16 +3,17 @@ About fastpotify-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/fastpotify-feedstock/blob/main/LICENSE.txt)
 
-Home: https://fastpotify.rocks/
+Home: https://spotifast.rocks/
 
 Package license: MIT
 
 Summary: Fast, lightweight, native Spotify client
 
-Development: https://github.com/crmne/fastpotify
+Development: https://github.com/crmne/spotifast
 
-Fastpotify is a native Spotify client with local playback, Spotify
-Connect, media-key integration, and system tray support.
+Spotifast, formerly Fastpotify, is a native Spotify client with local
+playback, Spotify Connect, media-key integration, and system tray support.
+Both the spotifast and fastpotify commands are included.
 
 Current build status
 ====================
