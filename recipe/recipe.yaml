@@ -6,7 +6,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/crmne/fastpotify/archive/refs/tags/v${{ version }}.tar.gz
+  url: https://github.com/crmne/spotifast/archive/refs/tags/v${{ version }}.tar.gz
   sha256: 8c0aecb9353346203e1d8d2c081f6110ed68b22f7cef1f8177542abce46d4a53
 
 build:
@@ -27,13 +27,13 @@ build:
       - mkdir -p "$PREFIX/Menu"
       - cp "$RECIPE_DIR/menu.json" "$PREFIX/Menu/fastpotify.json"
       - if: linux
-        then: cp packaging/macos/icon-1024.png "$PREFIX/Menu/fastpotify.png"
+        then: cp packaging/macos/icon-1024.png "$PREFIX/Menu/spotifast.png"
       - if: osx
         then:
-          - bash packaging/macos/bundle.sh "$PREFIX/bin/fastpotify" Fastpotify.app "$PKG_VERSION"
-          - cp Fastpotify.app/Contents/Resources/spotifast.icns "$PREFIX/Menu/fastpotify.icns"
+          - bash packaging/macos/bundle.sh "$PREFIX/bin/spotifast" Spotifast.app "$PKG_VERSION"
+          - cp Spotifast.app/Contents/Resources/spotifast.icns "$PREFIX/Menu/spotifast.icns"
       - if: win
-        then: cp packaging/windows/spotifast.ico "$PREFIX/Menu/fastpotify.ico"
+        then: cp packaging/windows/spotifast.ico "$PREFIX/Menu/spotifast.ico"
       - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
 
 requirements:
@@ -81,21 +81,22 @@ tests:
         - fastpotify
         - spotifast
       files:
-        - Menu/fastpotify.*
+        - Menu/fastpotify.json
+        - Menu/spotifast.*
       strict: true
 
 about:
-  homepage: https://fastpotify.rocks
+  homepage: https://spotifast.rocks
   summary: Fast, lightweight, native Spotify client
   description: |
-    Fastpotify, now released as Spotifast, is a native Spotify client with
-    local playback, Spotify Connect, media-key integration, and system tray
-    support. Both the spotifast and fastpotify commands are included.
+    Spotifast, formerly Fastpotify, is a native Spotify client with local
+    playback, Spotify Connect, media-key integration, and system tray support.
+    Both the spotifast and fastpotify commands are included.
   license: MIT
   license_file:
     - LICENSE
     - THIRDPARTY.yml
-  repository: https://github.com/crmne/fastpotify
+  repository: https://github.com/crmne/spotifast
 
 extra:
   recipe-maintainers:
