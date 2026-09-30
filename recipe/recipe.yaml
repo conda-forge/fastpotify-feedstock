@@ -41,7 +41,7 @@ requirements:
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
-    - ${{ compiler('rust') }}
+    - ${{ compiler('rust') }} >=1.98
     - cmake
     - brush
     - cargo-auditable
