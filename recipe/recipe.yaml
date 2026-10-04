@@ -25,7 +25,7 @@ build:
         then: LIBCLANG_PATH="$BUILD_PREFIX/lib" cargo auditable install --locked --no-track --bins --root "${LIBRARY_PREFIX:-$PREFIX}" --path .
         else: cargo auditable install --locked --no-track --no-default-features --bins --root "${LIBRARY_PREFIX:-$PREFIX}" --path .
       - mkdir -p "$PREFIX/Menu"
-      - cp "$RECIPE_DIR/menu.json" "$PREFIX/Menu/fastpotify.json"
+      - cp "$RECIPE_DIR/menu.json" "$PREFIX/Menu/spotifast.json"
       - if: linux
         then: cp packaging/macos/icon-1024.png "$PREFIX/Menu/spotifast.png"
       - if: osx
@@ -74,14 +74,11 @@ requirements:
 
 tests:
   - script:
-      - fastpotify --help
       - spotifast --help
   - package_contents:
       bin:
-        - fastpotify
         - spotifast
       files:
-        - Menu/fastpotify.json
         - Menu/spotifast.*
       strict: true
 
