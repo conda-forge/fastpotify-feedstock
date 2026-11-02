@@ -1,5 +1,5 @@
 context:
-  version: "0.15.0"
+  version: "0.16.0"
 
 package:
   name: fastpotify
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/crmne/spotifast/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: b861ab042dc678de67d8f4bd20371aa604f95a90297df1551045be5dafaf8a43
+  sha256: 5059d5826f01ad7eaddd2b4856ff28fc89f1143488fbaf194430cdd32f0105f3
 
 build:
   number: 0
